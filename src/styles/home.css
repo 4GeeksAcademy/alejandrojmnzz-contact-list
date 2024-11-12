@@ -1,0 +1,22 @@
+body {
+    padding: 20px 20px;
+}
+.contacts {
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    border-bottom: none;
+}
+.contact {
+    padding: 15px 0px;
+    border-bottom: 1px solid rgb(207, 207, 207);
+}
+.contact-info {
+    color: rgb(148, 148, 148);
+    margin-bottom: 5px;
+}
+.contact-info i {
+    padding-right: 12px;
+}
+.add-button {
+    color: rgb(5, 255, 5)
+}
