@@ -1,23 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 
 export function Home() {
 	const context = useContext(Context)
-
+	const [userDelete, setUserDelete] = useState("")
 
 	return (
 		<div className="container">
 			<div className="d-flex justify-content-end">
-				<Link className="btn add-button" to="/add-contact">Add new contact</Link>
+				<Link className="btn btn-success mb-3" to="/add-contact">Add new contact</Link>
 			</div>
-			<div className="contacts">
+			<div className="row d-flex justify-content-center contacts">
 				{
 					context.store.contacts.map((item) => {
 						return (
-							<div className="row p-4">
-								<div className="d-flex align-items-center col-12 col-md-7">
+							<div className="row contact">
+								<div className="d-flex align-items-center col-12 col-md-7 gap-5">
 									<img src="https://picsum.photos/id/237/180/180" className="rounded-circle" />
 									<div className="ms-4">
 										<h3>{item.name}</h3>
@@ -29,8 +29,8 @@ export function Home() {
 
 								<div className="col-12 col-md-5 d-flex justify-content-end">
 									<div>
-										<Link className="btn" to={`/edit-contact/${item.id}`}><i className="fa-solid fa-pen"></i></Link>
-										<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn"><i className="fa-solid fa-trash"></i></button>
+										<Link className="btn me-3" to={`/edit-contact/${item.id}`}><i className="fa-solid fa-pen"></i></Link>
+										<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn" onClick={() => setUserDelete(item.id)}><i className="fa-solid fa-trash"></i></button>
 
 										{/* Modal */}
 										<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -46,7 +46,7 @@ export function Home() {
 													<div className="modal-footer">
 														<button type="button" className="btn btn-primary" data-bs-dismiss="modal">Oh no!</button>
 														<button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {
-															context.actions.deleteContact(item)
+															context.actions.deleteContact(userDelete)
 														}}>Yes baby!</button>
 													</div>
 												</div>
@@ -57,11 +57,7 @@ export function Home() {
 
 							</div>
 
-							// <div key={item.id} className="contact d-flex align-items-center px-5">
-
-
-
-							// </div>
+																				
 						)
 					})
 				}

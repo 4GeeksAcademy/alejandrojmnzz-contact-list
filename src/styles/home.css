@@ -7,7 +7,7 @@ body {
     border-bottom: none;
 }
 .contact {
-    padding: 15px 0px;
+    padding: 15px 50px;
     border-bottom: 1px solid rgb(207, 207, 207);
 }
 .contact-info {
@@ -16,7 +16,4 @@ body {
 }
 .contact-info i {
     padding-right: 12px;
-}
-.add-button {
-    color: rgb(5, 255, 5)
 }

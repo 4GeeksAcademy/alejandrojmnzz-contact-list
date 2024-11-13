@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -10,13 +11,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			getAllContacts: async () => {
 				try {
+
 					let response = await fetch(`${getStore().baseUrl}/agendas/miagenda/contacts`)
 					let data = await response.json()
+					if (response.ok) {
+						setStore({
+							contacts: data.contacts
+						})
+					}
+					else {
+						let response = await fetch(`${getStore().baseUrl}/agendas/miagenda`,
+							{
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								},
+								body: {
+									"name": "",
+									"phone": "",
+									"email": "",
+									"address": ""
+								}
+							})
+						let data = await response.json()
+						
+					}
 
-					setStore({
-						contacts: data.contacts
-					})
-					console.log(data)
 				} catch (error) {
 					console.log(error)
 				}
@@ -41,13 +61,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteContact: async (contact) => {
 				try {
 					console.log(contact.id)
-					let response = await fetch(`${getStore().baseUrl}/agendas/miagenda/contacts/${contact.id}`,
+					let response = await fetch(`${getStore().baseUrl}/agendas/miagenda/contacts/${contact}`,
 						{
 							method: "DELETE"
 						}
 					)
 					getActions().getAllContacts()
-					
+
 				} catch (error) {
 					console.log(error)
 				}
